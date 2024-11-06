@@ -1,4 +1,4 @@
-package com.sarkaranimesh.gadgetgalaxy.controllers;
+package com.animesh.productstore.controllers;
 //The controller will allow us to perform CRUD operations
 
 import org.springframework.stereotype.Controller;
