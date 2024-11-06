@@ -1,9 +1,7 @@
 # Build Stage
 FROM maven:3.8.3-openjdk-17 AS build
 WORKDIR /app
-COPY pom.xml .   # Copy only the pom.xml first to leverage Docker caching
-RUN mvn dependency:go-offline  # Pre-fetch dependencies for faster builds
-COPY src ./src  # Copy the source files
+COPY . .
 RUN mvn clean package -DskipTests
 
 # Run Stage
