@@ -3,14 +3,12 @@ package com.animesh.productstore.model;
 import java.util.Date;
 
 import jakarta.persistence.*;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
 
 @Entity //This class represents an object or row in the database
 @Table(name="products") //Defining the name of the table
 public class Product {
 	
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -26,46 +24,9 @@ public class Product {
     
     @Column(columnDefinition = "TEXT")//This annotation shows that the below column
     //has TEXT data type otherwise database will assume as VARCHAR
-    private String imgName;
     private Date manufacturedDate;
     
-    
-    //default Constructor
-   /* public Product() {  	
-    }
-    
-    //Parameterized Constructor with id
-    public Product(int id, String name, double price, String brand, String modelNumber, String color, int warranty,
-			double batteryLife, double rating,String imgName, Date manufacturedDate) {
-		this.id = id;
-		this.name = name;
-		this.price = price;
-		this.brand = brand;
-		this.modelNumber = modelNumber;
-		this.color = color;
-		this.warranty = warranty;
-		this.batteryLife = batteryLife;
-		this.rating = rating;
-		this.imgName = imgName;
-		this.manufacturedDate = manufacturedDate;
-	}
-    
-    //Parameterized Constructor without id
-    public Product(String name, double price, String brand, String modelNumber, String color, int warranty,
-    		double batteryLife, double rating,String imgName, Date manufacturedDate) {
-        this.name = name;
-        this.price = price;
-        this.brand = brand;
-        this.modelNumber = modelNumber;
-        this.color = color;
-        this.warranty = warranty;
-        this.batteryLife = batteryLife;
-        this.rating = rating;
-        this.imgName = imgName;
-		this.manufacturedDate = manufacturedDate;
-    }*/
-
-	public int getId() {
+    public int getId() {
 		return id;
 	}
 
@@ -135,14 +96,6 @@ public class Product {
 
 	public void setRating(double rating) {
 		this.rating = rating;
-	}
-
-	public String getImgName() {
-		return imgName;
-	}
-
-	public void setImgName(String imgName) {
-		this.imgName = imgName;
 	}
 
 	public Date getManufacturedDate() {
