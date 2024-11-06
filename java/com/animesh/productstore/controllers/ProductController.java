@@ -28,15 +28,10 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping({"","/"})
+@RequestMapping("/products")
 public class ProductController {
 	
 	//using repo object we will perform SELECT, INSERT, UPDATE and DELETE
-	
-	@GetMapping({"","/"})//this is index.html page will open after login
-	public String home() {
-		return "index"; 
-	}
 	
 		@Autowired
 		private ProductRepository repo;
@@ -57,7 +52,7 @@ public class ProductController {
 			//addAttribute(html object name, java file object name)
 			//java.products---->model---->html.products
 			model.addAttribute("products",products);
-			return "showProducts";//in resources/templates the products folder is defined
+			return "products/index";//in resources/templates the products folder is defined
 		}
 		
 		//Display Create new product page 
@@ -68,7 +63,7 @@ public class ProductController {
 					//Thus Validation is done using ProductDto Object
 					ProductDto productDto = new ProductDto();
 					model.addAttribute("productDto",productDto);
-					return "CreateProduct";//in resources/templates the products folder is defined
+					return "products/CreateProduct";//in resources/templates the products folder is defined
 				}
 		
 		//@Valid will check all the validation of the
@@ -87,7 +82,7 @@ public class ProductController {
 					//if there is any validation error than it will be assigned into result object
 					if(result.hasErrors()) {
 						//if there is any error we will redirect to the same page
-						return "CreateProduct";
+						return "products/CreateProduct";
 					}
 					
 					//saving image file into the server
@@ -133,7 +128,7 @@ public class ProductController {
 					return "redirect:/products";//in resources/templates the products folder is defined
 				}
 				//Show Details of a Product
-				@GetMapping("/show")
+				/*@GetMapping("/show")
 				public String showDetails (Model model, @RequestParam int id) {
 					try {
 						//SELECT * FROM products WHERE product.id = url.id;
@@ -149,7 +144,7 @@ public class ProductController {
 					}
 					return "showDetails";
 
-				}
+				}*/
 				
 				//Display the edit product page
 				@GetMapping("/edit")//products/edit
@@ -183,7 +178,7 @@ public class ProductController {
 						System.out.println("Exception catched:" + e.getMessage());
 						return "redirect:/products";
 					}
-					return "EditProduct";
+					return "products/EditProduct";
 				}
 				
 				//Write updated data into the database
@@ -195,7 +190,7 @@ public class ProductController {
 						Product product = repo.findById(id).get();
 						model.addAttribute("product",product);
 						
-						if(result.hasErrors()) return "EditProduct";
+						if(result.hasErrors()) return "products/EditProduct";
 						
 						//checking any new image file is received or not
 						/*if(!productDto.getImgName().isEmpty())  //Note here we checking if input is NOT NULL then update the new image
@@ -243,7 +238,7 @@ public class ProductController {
 						repo.save(product);
 					}catch (Exception e) {
 						System.out.println("Exception catched:" + e.getMessage());
-						return "EditProduct";
+						return "products/EditProduct";
 					}
 					//returns the url
 					return "redirect:/products";//redirect to url "/products"
