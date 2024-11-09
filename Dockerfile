@@ -1,13 +1,10 @@
-# Build Stage
-FROM maven:3.8.3-openjdk-17 AS build
-WORKDIR /app
+FROM maven:3.9.9-eclipse-temurin-17 AS build
 COPY . .
 RUN mvn clean package -DskipTests
 
-# Run Stage
-FROM openjdk:17.0.1-jdk-slim
-WORKDIR /app
-COPY --from=build /app/target/productstore-0.0.1-SNAPSHOT.jar productstore.jar
+FROM eclipse-temurin:17-alpine
+#COPY --from=build /target/gadgetgalaxy-0.0.1-SNAPSHOT.jar gadgetgalaxy.jar
+COPY --from=build /target/*.jar productstore.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "productstore.jar"]
+ENTRYPOINT ["java","-jar","productstore.jar"]
 
